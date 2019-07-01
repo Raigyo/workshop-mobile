@@ -4,7 +4,7 @@
 
 *July 2019*
 
-> 🔨 Pong game for Android. Workshop by [Antony Rizzitelli](https://github.com/Upd4ting/Workshop-Mobile/blob/master/Pong/README.md). Language used: NativeScript, an open source framework for building truly native mobile apps with Angular, Vue.js, TypeScript, or JavaScript.
+> 🔨 Pong game for Android. Workshop by [Antony Rizzitelli](https://github.com/Upd4ting/Workshop-Mobile/blob/master/Pong/README.md). Language used: NativeScript, an open source framework for building truly native mobile apps with Angular, Vue.js, TypeScript, or JavaScript. It also uses the external module 'tinyengine'.
 
 
 * * *
