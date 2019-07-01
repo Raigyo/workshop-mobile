@@ -7,21 +7,36 @@ import { GestureTypes, TouchGestureEventData } from "tns-core-modules/ui/gesture
 import labelModule = require("tns-core-modules/ui/label");
 
 
-export class CollideComponent implements Component {
-    public onStart(entity: Entity): void {
 
+export class BallComponent implements Component {
+    public onStart(entity: Entity): void {
+      //console.log("olé");
     }
 
     public onUpdate(entity: Entity): void {
-        entity.setRotation(entity.getRotation() + 3);
+        //console.log(entity.getPosition().getY());
+        //console.log(entity.getPosition().getX());
+
+        if (entity.getPosition().getY()<0 || entity.getPosition().getY()>300){
+          console.log("rebond");
+          entity.setVelocity(getRandomDir());
+        }
+        if (entity.getPosition().getX()>300){
+          console.log("Player 1: +1");
+          entity.getPosition().setY(150);
+          entity.getPosition().setX(150);
+          //entity.setVelocity(getRandomDir());
+        }
+        if (entity.getPosition().getX()<0){
+          console.log("Player 2: +1");
+          entity.getPosition().setY(150);
+          entity.getPosition().setX(150);
+          //entity.setVelocity(getRandomDir());
+        }
     }
 
     public onCollide(collider: Entity, collided: Entity) {
-        collided.getVelocity().setX(collider.getVelocity().getX());
-        collided.getVelocity().setY(collider.getVelocity().getY());
-
-        collider.getVelocity().setX(-collider.getVelocity().getX());
-        collider.getVelocity().setY(-collider.getVelocity().getY());
+      collider.getVelocity().setX(-collider.getVelocity().getX());
     }
 
     public onDestroy(entity: Entity): void {
@@ -29,7 +44,7 @@ export class CollideComponent implements Component {
     }
 
     public getClassName(): string {
-        return "CollideComponent";
+        return "BallComponent";
     }
 }
 
@@ -43,27 +58,45 @@ export function navigatingTo(args: EventData) {
 	let world: World = new World(container, 300, 300);
 
   //BALL
-	let ballEntity: Entity = new Entity(new Vector2(150, 150), new Vector2(0, 0), 45, new CircleShape(10, '#FFFFFF'));
-  ballEntity.addComponent(CollideComponent);
+	let ballEntity: Entity = new Entity(new Vector2(150, 150), getRandomDir(), 45, new CircleShape(10, '#FFFFFF'));
+  //ballEntity.addComponent(BallComponent);
+  //ballEntity.addComponent(CollideComponent);
+  ballEntity.addComponent(BallComponent);
   world.addEntity(ballEntity);
 
   //PAD PLAYER 1
-  let cubePad1: Entity = new Entity(new Vector2(15, 50), new Vector2(0, 0), 0, new CubeShape(20, 80, '#FFFFFF'));
+  let cubePad1: Entity = new Entity(new Vector2(15, 120), new Vector2(0, 0), 0, new CubeShape(20, 80, '#FFFFFF'));
   //cubePad1.addComponent(CollideComponent);
   let shapePad1 = <CubeShape>cubePad1.getShape();
   shapePad1.getImg().on(GestureTypes.touch, function (args: TouchGestureEventData) {
-      cubePad1.setPosition(new Vector2(15, cubePad1.getPosition().getY() + args.getY()+25));
+      cubePad1.setPosition(new Vector2(15, cubePad1.getPosition().getY() + args.getY()-25));
   });
   world.addEntity(cubePad1);
 
   //PAD PLAYER 2
-	let cubePad2: Entity = new Entity(new Vector2(265, 50), new Vector2(0, 0), 0, new CubeShape(20, 80, '#FFFFFF'));
+	let cubePad2: Entity = new Entity(new Vector2(265, 120), new Vector2(0, 0), 0, new CubeShape(20, 80, '#FFFFFF'));
   //cubePad2.addComponent(CollideComponent);
   let shapePad2 = <CubeShape>cubePad2.getShape();
   shapePad2.getImg().on(GestureTypes.touch, function (args: TouchGestureEventData) {
-      cubePad2.setPosition(new Vector2(265, cubePad2.getPosition().getY() + args.getY()+25));
+      cubePad2.setPosition(new Vector2(265, cubePad2.getPosition().getY() + args.getY()-25));
   });
   world.addEntity(cubePad2);
 
 	setInterval(function () { world.tick(); }, 20);
+}
+
+// Get a random vector direction
+function getRandomDir(): Vector2 {
+	let x = (Math.random() - 0.5) / 5;
+	let y = (Math.random() - 0.5) / 5;
+
+	// Trying to not have an y too low
+	if (y < 0 && y > -0.15) {
+		y = -0.15;
+	} else if (y > 0 && y < 0.15) {
+		y = 0.15;
+	}
+
+	let vec = new Vector2(x, y);
+	return vec.normalize().multiply(0.07, 0.07);
 }
