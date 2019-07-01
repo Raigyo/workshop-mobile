@@ -7,7 +7,6 @@ import { GestureTypes, TouchGestureEventData } from "tns-core-modules/ui/gesture
 import labelModule = require("tns-core-modules/ui/label");
 
 
-
 export class BallComponent implements Component {
     public onStart(entity: Entity): void {
       //console.log("olé");
@@ -17,7 +16,7 @@ export class BallComponent implements Component {
         //console.log(entity.getPosition().getY());
         //console.log(entity.getPosition().getX());
 
-        if (entity.getPosition().getY()<0 || entity.getPosition().getY()>300){
+        if (entity.getPosition().getY()<10 || entity.getPosition().getY()>285){
           console.log("rebond");
           entity.setVelocity(getRandomDir());
         }
