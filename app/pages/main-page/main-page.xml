@@ -10,9 +10,9 @@ https://docs.nativescript.org/ui/components.
     http://docs.nativescript.org/ui/action-bar
     -->
     <Page.actionBar>
-        <ActionBar title="My App" icon="" class="action-bar">
-        </ActionBar>
-    </Page.actionBar>
+  		<ActionBar title="Pong Game" icon="" class="action-bar">
+  		</ActionBar>
+  	</Page.actionBar>
     <!--
     The StackLayout stacks UI components on the screen—either vertically or horizontally.
     In this case, the StackLayout does vertical stacking; you can change the stacking to
@@ -25,8 +25,7 @@ https://docs.nativescript.org/ui/components.
     class names available for styling your app at https://docs.nativescript.org/ui/theme.
     -->
     <StackLayout class="p-20">
-        <Label text="Tap the button" class="h1 text-center"/>
-        <Button text="TAP" tap="{{ onTap }}" class="btn btn-primary btn-active"/>
-        <Label text="{{ message }}" class="h2 text-center" textWrap="true"/>
-    </StackLayout>
+  		<Button text="JOUER" tap="{{ onPlay }}" class="btn btn-primary btn-active"/>
+  		<Button text="QUITTER" tap="{{ onQuit }}" class="btn btn-primary btn-active"/>
+  	</StackLayout>
 </Page>
