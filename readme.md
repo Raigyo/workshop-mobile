@@ -21,6 +21,6 @@ use `tns run android --emulator` to launch in an emulator
 
 ## Useful links
 
-(NativeScript)[https://www.nativescript.org/]
+[NativeScript](https://www.nativescript.org/)
 
-(External module "tinyengine.common")[https://upd4ting.github.io/nativescript-tinyengine/modules/_tinyengine_common_.html]
+[External module "tinyengine.common"](https://upd4ting.github.io/nativescript-tinyengine/modules/_tinyengine_common_.html)
