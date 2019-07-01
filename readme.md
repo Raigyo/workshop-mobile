@@ -1,4 +1,4 @@
-# Becode - Nativescript workshop - Pong
+# Becode - Nativescript/Typescript workshop - Pong
 
 ![Becode logo](https://raw.githubusercontent.com/Raigyo/react-character-manager/master/img/becode-logo.png)
 
